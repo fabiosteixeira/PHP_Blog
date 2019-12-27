@@ -1,23 +1,29 @@
-name: PHP Composer
+name: Blog API Application
 
 on: [push]
 
 jobs:
   build:
 
+    name: Blog API
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate
+    - name: Instala PHP 7.4
+      run: |
+        sudo apt-get update
+        sudo apt -y install software-properties-common
+        sudo add-apt-repository ppa:ondrej/php
+        sudo apt-get update
+        sudo apt -y install php7.4 php7.4-xml php7.4-mbstring php7.4-sqlite
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Valida arquivos composer.[json|lock]
+      run: cd 02-blog && composer validate
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+    - name: Instala dependências
+      run: cd 02-blog && composer install --prefer-dist --no-progress --no-suggest
 
-    # - name: Run test suite
-    #   run: composer run-script test
+    - name: Testes funcionais
+      run: cd 02-blog && bin/phpunit
