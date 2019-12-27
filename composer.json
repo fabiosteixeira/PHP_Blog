@@ -1,4 +1,12 @@
 {
+    "name": "fabiosteixeira/php_blog",
+    "description": "Blog PHP para a materia da PosDevWEB",
+    "authors": [
+        {
+            "name": "Fábio Teixeira",
+            "email": "fabio@fabio.vet.br"
+        }
+    ],
     "type": "project",
     "license": "proprietary",
     "require": {
